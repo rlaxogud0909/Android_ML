@@ -2,6 +2,8 @@ package com.example.lionapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import com.example.lionapp.databinding.ActivityEventBinding
 
@@ -19,6 +21,14 @@ import com.example.lionapp.databinding.ActivityEventBinding
 //   binding.button.setOnClickListener { //콜백함수 구현 }
 // 이벤트 소비 consumption : 동일한 뷰에 등록된 다음에 일치하는 이벤트 리스너에 계속 전달할 필요 여부를 결정
 //   콜백함수에서 true/false 반환
+
+// 터치와 다중 터치 이벤트 처리하기
+// 터치 이벤트 처리 : OnTouchListener {v: View, m: MotionEvent -> }
+//   MotionEvent 객체
+//   터치 액션 : m.getActionMasked(), m.getActionIndex()
+//   다중 터치 처리 : m.pointerCount, m.getPointerId(인덱스 번호 0부터)
+// 다중 터치 앱
+//   터치 이벤트 리스너 구현
 
 
 class EventActivity : AppCompatActivity() {
@@ -44,5 +54,20 @@ class EventActivity : AppCompatActivity() {
 //            true // 이벤트를 소비햇다는 것을 나타냄
             false  // 이벤트를 완전히 소비하지 않고 같은 리스너에게 계속 전달
         }
+
+//        binding.activityMain.setOnTouchListener(object : View.OnTouchListener{
+//            override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+//                TODO("Not yet implemented")
+//            }
+//        })
+
+        binding.activityMain.setOnTouchListener { v: View, m: MotionEvent ->
+            val pointerCount = m.pointerCount
+            val pointerId = m.getPointerId(0)
+            binding.tvStatus.text = "pointerCount=$pointerCount, pointerId=$pointerId"
+            Log.d("Event...", "pointerCount=$pointerCount, pointerId=$pointerId")
+            true
+        }
+
     }
 }
