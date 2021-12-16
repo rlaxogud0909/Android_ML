@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import com.example.lionapp.databinding.ActivityHomeBinding
+import kotlin.math.roundToInt
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -25,6 +26,10 @@ class HomeActivity : AppCompatActivity() {
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
 
+        val dm = resources.displayMetrics
+//        val size = Math.round(10 * dm.density)
+        val size = (10 * dm.density).roundToInt()
+        params.topMargin = size
 
         for(key in buttons.keys) {
             val btn = Button(this)
