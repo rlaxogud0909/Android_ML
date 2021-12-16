@@ -1,5 +1,6 @@
 package com.example.lionapp
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -74,6 +75,8 @@ class StatechangeActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Log.i(TAG, "onStart")
+
+        restoreData()
     }
 
     override fun onPause() {
@@ -84,11 +87,15 @@ class StatechangeActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         Log.i(TAG, "onStop")
+
+        saveData()
     }
 
     override fun onRestart() {
         super.onRestart()
         Log.i(TAG, "onRestart")
+
+        restoreData()
     }
 
     override fun onDestroy() {
@@ -110,5 +117,19 @@ class StatechangeActivity : AppCompatActivity() {
 
         val userText = savedInstanceState.getCharSequence("savedText")
         binding.editText.setText(userText)
+    }
+
+    private fun restoreData() {
+        val sharedPreferences = getSharedPreferences("lion", 0)
+        val userText = sharedPreferences.getString("savedText", "")
+        binding.editText.setText(userText)
+    }
+
+    private fun saveData() {
+        val sharedPreferences = getSharedPreferences("lion", 0)
+        val editor = sharedPreferences.edit()
+        val userText = binding.editText.text.toString()
+        editor.putString("savedText", userText)
+        editor.apply()
     }
 }
