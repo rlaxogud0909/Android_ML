@@ -10,8 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LionApp">
         <activity
+            android:name=".StatechangeActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

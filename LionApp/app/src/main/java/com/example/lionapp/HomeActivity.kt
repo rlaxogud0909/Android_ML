@@ -20,6 +20,7 @@ class HomeActivity : AppCompatActivity() {
         buttons["Lion"] = MainActivity::class.java
         buttons["Count"] = CountActivity::class.java
 
+        buttons["액티비티 생명주기"] = StatechangeActivity::class.java
 
         val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
