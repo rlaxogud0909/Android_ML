@@ -2,6 +2,7 @@ package com.example.lionapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.core.view.GestureDetectorCompat
@@ -27,6 +28,7 @@ class GestureActivity : AppCompatActivity(),
     GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
     private lateinit var binding: ActivityGestureBinding
     var gestureDetector: GestureDetectorCompat? = null
+    val TAG = "GestureEvent"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,17 +39,26 @@ class GestureActivity : AppCompatActivity(),
         this.gestureDetector?.setOnDoubleTapListener(this)
     }
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        this.gestureDetector?.onTouchEvent(event)
+        Log.i(TAG, "onTouchEvent")
+        return super.onTouchEvent(event)
+    }
+
     override fun onDown(e: MotionEvent?): Boolean {
         binding.tvGestureStatus.text = "onDown"
+        Log.i(TAG, "onDown")
         return true
     }
 
     override fun onShowPress(e: MotionEvent?) {
         binding.tvGestureStatus.text = "onShowPress"
+        Log.i(TAG, "onShowPress")
     }
 
     override fun onSingleTapUp(e: MotionEvent?): Boolean {
         binding.tvGestureStatus.text = "onSingleTapUp"
+        Log.i(TAG, "onSingleTapUp")
         return true
     }
 
@@ -58,11 +69,13 @@ class GestureActivity : AppCompatActivity(),
         distanceY: Float
     ): Boolean {
         binding.tvGestureStatus.text = "onScroll"
+        Log.i(TAG, "onScroll")
         return true
     }
 
     override fun onLongPress(e: MotionEvent?) {
         binding.tvGestureStatus.text = "onLongPress"
+        Log.i(TAG, "onLongPress")
     }
 
     override fun onFling(
@@ -72,21 +85,25 @@ class GestureActivity : AppCompatActivity(),
         velocityY: Float
     ): Boolean {
         binding.tvGestureStatus.text = "onFling"
+        Log.i(TAG, "onFling")
         return true
     }
 
     override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
         binding.tvGestureStatus.text = "onSingleTapConfirmed"
+        Log.i(TAG, "onSingleTapConfirmed")
         return true
     }
 
     override fun onDoubleTap(e: MotionEvent?): Boolean {
         binding.tvGestureStatus.text = "onDoubleTap"
+        Log.i(TAG, "onDoubleTap")
         return true
     }
 
     override fun onDoubleTapEvent(e: MotionEvent?): Boolean {
         binding.tvGestureStatus.text = "onDoubleTapEvent"
+        Log.i(TAG, "onDoubleTapEvent")
         return true
     }
 }
