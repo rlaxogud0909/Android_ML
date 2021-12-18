@@ -21,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
         buttons["Count"] = CountActivity::class.java
 
         buttons["액티비티 생명주기"] = StatechangeActivity::class.java
+        buttons["제스처"] = GestureActivity::class.java
 
         val params = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT,
