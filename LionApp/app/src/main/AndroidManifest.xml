@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LionApp">
         <activity
+            android:name=".MemberActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".GestureActivity"
             android:exported="false" />
         <activity
