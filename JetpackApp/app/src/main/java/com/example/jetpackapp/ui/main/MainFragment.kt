@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.SavedStateViewModelFactory
 import com.example.jetpackapp.R
 import com.example.jetpackapp.databinding.MainFragmentBinding
 import com.example.jetpackapp.BR.convertViewModel
@@ -34,9 +35,14 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        binding.setVariable(convertViewModel, viewModel)
+        activity?.application?.let {
+            val factory = SavedStateViewModelFactory(it, this)
+            viewModel = ViewModelProvider(this, factory).get(MainViewModel::class.java)
+
+            binding.setVariable(convertViewModel, viewModel)
+        }
+
     }
 
 }
