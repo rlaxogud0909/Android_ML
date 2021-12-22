@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.jetpackapp.R
 import com.example.jetpackapp.databinding.MainFragmentBinding
 
@@ -31,12 +32,14 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        binding.tvResult.text = viewModel.getResult().toString()
+        val resultObserber = Observer<Float> {
+            result -> binding.tvResult.text = result.toString()
+        }
+        viewModel.getResult().observe(viewLifecycleOwner, resultObserber)
 
         binding.btnConvert.setOnClickListener {
             if (binding.etDollar.text.isNotEmpty()){
                 viewModel.setAmount( binding.etDollar.text.toString() )
-                binding.tvResult.text = viewModel.getResult().toString()
             } else {
                 binding.tvResult.text = "No Value"
             }
